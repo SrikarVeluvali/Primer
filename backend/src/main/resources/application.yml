@@ -17,3 +17,9 @@ server:
 primer:
   storage:
     root: ${PAPER_STORAGE_ROOT:./data/papers}
+  pdf-extraction:
+    max-source-size: 50MB
+    max-pages: 100
+    render-dpi: 150
+    max-rendered-pages: 20
+    max-total-image-size: 50MB
