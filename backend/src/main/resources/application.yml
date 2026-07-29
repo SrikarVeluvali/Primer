@@ -10,9 +10,16 @@ spring:
       ddl-auto: validate
   flyway:
     enabled: true
+  ai:
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY:}
+        chat:
+          model: ${GEMINI_MODEL:gemini-2.5-flash}
 
 server:
   port: 8080
+
 
 primer:
   storage:
@@ -23,3 +30,13 @@ primer:
     render-dpi: 150
     max-rendered-pages: 20
     max-total-image-size: 50MB
+  ai:
+    # Bean name of the active dev.primer.ai.AIInterface implementation.
+    # To switch providers, change only this value (e.g. "openai", "anthropic")
+    # once a corresponding @Service("<name>") bean exists.
+    provider: ${PRIMER_AI_PROVIDER:gemini}
+    max-image-size: 15MB
+    allowed-image-types:
+      - image/png
+      - image/jpeg
+      - image/webp
