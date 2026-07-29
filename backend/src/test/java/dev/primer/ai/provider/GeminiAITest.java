@@ -22,9 +22,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class GeminiAITest {
 
-    @Mock
-    private ChatClient.Builder chatClientBuilder;
-
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private ChatClient chatClient;
 
@@ -32,8 +29,7 @@ class GeminiAITest {
 
     @BeforeEach
     void setUp() {
-        when(chatClientBuilder.build()).thenReturn(chatClient);
-        geminiAI = new GeminiAI(chatClientBuilder);
+        geminiAI = new GeminiAI(chatClient);
     }
 
     @Test
