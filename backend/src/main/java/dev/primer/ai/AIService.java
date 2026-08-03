@@ -62,6 +62,26 @@ public class AIService {
         }
     }
 
+    /**
+     * Same contract as {@link #process(AIRequest)}, but the reply is bound to {@code type} instead of
+     * returned as text. Used wherever the model's output is stored or acted on rather than shown.
+     */
+    public <T> T processStructured(AIRequest request, Class<T> type) {
+        if (!request.hasText() && !request.hasImage()) {
+            throw new InvalidAiRequestException("Request must contain text and/or an image");
+        }
+        validateImage(request);
+
+        try {
+            return provider.structuredOutput(request, type);
+        } catch (AiProviderException exception) {
+            throw exception;
+        } catch (Exception exception) {
+            throw new AiProviderException(
+                    "AI provider '%s' failed to process the request".formatted(providerName), exception);
+        }
+    }
+
     private void validateImage(AIRequest request) {
         if (!request.hasImage()) {
             return;

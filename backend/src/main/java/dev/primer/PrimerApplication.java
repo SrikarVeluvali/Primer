@@ -6,10 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import dev.primer.config.PdfExtractionProperties;
+import dev.primer.config.QuestionnaireProperties;
 import dev.primer.config.StorageProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties({StorageProperties.class, PdfExtractionProperties.class, AIProperties.class})
+@EnableConfigurationProperties({StorageProperties.class, PdfExtractionProperties.class, AIProperties.class,
+        QuestionnaireProperties.class})
 public class PrimerApplication {
     public static void main(String[] args) {
         SpringApplication.run(PrimerApplication.class, args);
