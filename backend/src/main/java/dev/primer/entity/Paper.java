@@ -36,6 +36,10 @@ public class Paper {
     @Column(name = "processing_status", nullable = false, length = 32)
     private ProcessingStatus processingStatus;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "reading_stage", nullable = false, length = 32)
+    private ReadingStage readingStage;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
@@ -52,6 +56,7 @@ public class Paper {
         this.storagePath = storagePath;
         this.fileStatus = PaperFileStatus.STORED;
         this.processingStatus = ProcessingStatus.PENDING;
+        this.readingStage = ReadingStage.INGESTED;
     }
 
     @PrePersist
@@ -70,9 +75,21 @@ public class Paper {
     public String getArxivId() { return arxivId; }
     public String getStoragePath() { return storagePath; }
     public PaperFileStatus getFileStatus() { return fileStatus; }
+    public ReadingStage getReadingStage() { return readingStage; }
     public void markFileMissing() { fileStatus = PaperFileStatus.MISSING; }
     public void markStored(String storagePath) {
         this.storagePath = storagePath;
         this.fileStatus = PaperFileStatus.STORED;
+    }
+
+    /**
+     * Moves the reader's journey to {@code stage}, ignoring anything that would move it backwards.
+     * Re-opening the PDF after answering the questionnaire, for example, must not reset the stage to
+     * {@link ReadingStage#ACCESSED}.
+     */
+    public void advanceTo(ReadingStage stage) {
+        if (stage.ordinal() > readingStage.ordinal()) {
+            readingStage = stage;
+        }
     }
 }

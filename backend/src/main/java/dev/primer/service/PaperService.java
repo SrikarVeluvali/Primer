@@ -3,6 +3,7 @@ package dev.primer.service;
 import java.nio.file.Path;
 import java.util.UUID;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,7 @@ import dev.primer.client.ArxivPdfClient;
 import dev.primer.client.ArxivReference;
 import dev.primer.client.ArxivReferenceParser;
 import dev.primer.entity.Paper;
+import dev.primer.entity.ReadingStage;
 import dev.primer.exception.PaperNotFoundException;
 import dev.primer.repository.PaperRepository;
 
@@ -20,13 +22,16 @@ public class PaperService {
     private final ArxivReferenceParser referenceParser;
     private final ArxivPdfClient arxivPdfClient;
     private final PaperStorage paperStorage;
+    private final ApplicationEventPublisher eventPublisher;
 
     public PaperService(PaperRepository paperRepository, ArxivReferenceParser referenceParser,
-                        ArxivPdfClient arxivPdfClient, PaperStorage paperStorage) {
+                        ArxivPdfClient arxivPdfClient, PaperStorage paperStorage,
+                        ApplicationEventPublisher eventPublisher) {
         this.paperRepository = paperRepository;
         this.referenceParser = referenceParser;
         this.arxivPdfClient = arxivPdfClient;
         this.paperStorage = paperStorage;
+        this.eventPublisher = eventPublisher;
     }
 
     @Transactional
@@ -67,6 +72,12 @@ public class PaperService {
             paper.markFileMissing();
             throw new PaperNotFoundException("The PDF is no longer available for paper " + id + ".");
         }
+
+        // Opening the paper is what tells us a reader has started on it, and it is the point at which
+        // the questionnaire becomes worth generating. The event is handled after this transaction
+        // commits so the generation never delays serving the PDF.
+        paper.advanceTo(ReadingStage.ACCESSED);
+        eventPublisher.publishEvent(new PaperAccessedEvent(paper.getId()));
         return new PaperPdf(paper.getId(), paperStorage.resolve(paper.getStoragePath()));
     }
 }

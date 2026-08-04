@@ -5,6 +5,7 @@ CREATE TABLE papers (
     storage_path VARCHAR(512) NOT NULL,
     file_status VARCHAR(32) NOT NULL,
     processing_status VARCHAR(32) NOT NULL,
+    reading_stage VARCHAR(32) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL
 );

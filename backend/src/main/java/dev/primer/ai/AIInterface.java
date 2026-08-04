@@ -14,4 +14,12 @@ public interface AIInterface {
     AIResponse imageOnlyInput(AIRequest request);
 
     AIResponse textAndImageInput(AIRequest request);
+
+    /**
+     * Sends the request and binds the reply to {@code type} instead of returning free-form text.
+     * Implementations are expected to describe {@code type}'s shape to the model so the reply can be
+     * deserialized without post-processing, which is what makes generated artifacts such as the
+     * questionnaire safe to store and serve verbatim.
+     */
+    <T> T structuredOutput(AIRequest request, Class<T> type);
 }

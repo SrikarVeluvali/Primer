@@ -28,6 +28,11 @@ spring:
       chat:
         options:
           model: ${GROQ_MODEL:qwen/qwen3.6-27b}
+          # A reasoning model spends output tokens thinking before it answers. Too low a ceiling and
+          # the reply is cut off mid-thought, leaving no JSON at all; too high and a single call can
+          # exceed a per-minute token budget.
+          max-tokens: ${GROQ_MAX_TOKENS:4096}
+          reasoning-effort: ${GROQ_REASONING_EFFORT:none}
 
 server:
   port: 8080
@@ -42,6 +47,15 @@ primer:
     render-dpi: 150
     max-rendered-pages: 20
     max-total-image-size: 50MB
+  questionnaire:
+    min-questions: 5
+    max-questions: 10
+    max-attempts: 3
+    # Both agents are sent this much paper text each, and a rejected questionnaire costs one more
+    # call, so a run can spend three times this within a minute. The default is sized for Groq's
+    # free tier (8000 tokens/minute); on a paid tier or a large-context model, raise it — more of the
+    # paper reaching the agents means better-grounded questions.
+    max-input-characters: ${PRIMER_QUESTIONNAIRE_MAX_INPUT_CHARACTERS:8000}
   ai:
     # Bean name of the active dev.primer.ai.AIInterface implementation.
     # To switch providers, change only this value (e.g. "openai", "anthropic")

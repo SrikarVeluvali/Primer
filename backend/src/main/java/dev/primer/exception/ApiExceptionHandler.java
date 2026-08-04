@@ -20,6 +20,11 @@ public class ApiExceptionHandler {
         return response(HttpStatus.BAD_GATEWAY, exception.getMessage());
     }
 
+    @ExceptionHandler(QuestionnaireGenerationException.class)
+    ResponseEntity<Map<String, String>> questionnaireFailure(QuestionnaireGenerationException exception) {
+        return response(HttpStatus.BAD_GATEWAY, exception.getMessage());
+    }
+
     @ExceptionHandler(PaperNotFoundException.class)
     ResponseEntity<Map<String, String>> paperNotFound(PaperNotFoundException exception) {
         return response(HttpStatus.NOT_FOUND, exception.getMessage());
