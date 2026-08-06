@@ -15,6 +15,11 @@ public class ApiExceptionHandler {
         return response(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
+    @ExceptionHandler(InvalidQuestionnaireAnswerException.class)
+    ResponseEntity<Map<String, String>> invalidQuestionnaireAnswer(InvalidQuestionnaireAnswerException exception) {
+        return response(HttpStatus.BAD_REQUEST, exception.getMessage());
+    }
+
     @ExceptionHandler(PaperDownloadException.class)
     ResponseEntity<Map<String, String>> downloadFailure(PaperDownloadException exception) {
         return response(HttpStatus.BAD_GATEWAY, exception.getMessage());
