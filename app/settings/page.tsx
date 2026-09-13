@@ -1,0 +1,6 @@
+"use client";
+
+import { signOut, useSession } from "next-auth/react";
+import { ProfileMenu } from "@/components/profile-menu";
+
+export default function SettingsPage() { const { data: session } = useSession(); const name = session?.user?.name ?? "Primer reader"; return <main className="dashboard"><nav className="dashboard-nav"><div className="brand"><span>✦</span> Primer</div><a href="/dashboard">Library</a><span className="nav-spacer" /><ProfileMenu /></nav><section className="settings"><header><p className="eyebrow">YOUR PROFILE</p><h1>Profile & settings</h1><p>Manage your Primer profile and reading experience.</p></header><div className="settings-card"><div className="profile-avatar">{name[0].toUpperCase()}</div><div><h2>{name}</h2><p>{session?.user?.email ?? "Sign in to save your library across devices."}</p></div><button className="secondary">Edit profile</button></div><div className="settings-card setting-row"><div><h2>Reading appearance</h2><p>Use the profile menu to switch between light and dark mode.</p></div></div><div className="settings-card danger-row"><div><h2>Sign out</h2><p>End your current Primer session on this device.</p></div><button className="secondary" onClick={() => signOut({ callbackUrl: "/" })}>Sign out</button></div></section></main>; }
