@@ -1,0 +1,623 @@
+:root {
+  --bg: #141925;
+  --surface: #1c2331;
+  --panel: #171e2b;
+  --text: #e3e8f2;
+  --text-muted: #a0adc1;
+  --accent: #a79cf1;
+  --border: #30394b;
+  --soft: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  --ink: var(--text);
+  --muted: var(--text-muted);
+  --iris: var(--accent);
+  --iris-dark: color-mix(in srgb, var(--accent) 85%, var(--text));
+  --line: var(--border);
+  --sidebar: var(--panel);
+  --lavender: var(--soft);
+  color: var(--text);
+  background: var(--bg);
+}
+html,
+body,
+#root {
+  background: var(--bg);
+  color: var(--text);
+}
+.app-shell,
+.app-body,
+.conversation,
+.auth-page,
+.boot-screen,
+.home-page,
+.library-page,
+.settings-page {
+  background: var(--surface);
+  color: var(--text);
+}
+.sidebar,
+.paper-panel,
+.auth-story,
+.auth-form-panel {
+  background: var(--panel);
+  border-color: var(--border);
+}
+.topbar,
+.conversation-toolbar,
+.sidebar-section-title,
+.sidebar-bottom,
+.user-row,
+.home-bottom,
+.home-footer,
+.library-tools,
+.paper-tabs,
+.abstract-section,
+.settings-section,
+.auth-privacy {
+  border-color: var(--border);
+}
+.brand,
+.home-intro h1,
+.auth-story h1,
+.auth-form-wrap h2,
+.page-heading h1,
+.chat-welcome h2,
+.index-state h2,
+.section-heading h2,
+.possibility h3,
+.recent-card h3,
+.library-paper h3,
+.paper-overview h2,
+.settings-section h2,
+.settings-section h3,
+.import-dialog h2,
+.confirm-dialog h2 {
+  color: var(--text);
+}
+.brand-dot {
+  color: var(--accent);
+}
+.brand-mark i {
+  background: var(--accent);
+}
+.brand-mark i:nth-child(2) {
+  background: color-mix(in srgb, var(--accent) 75%, var(--surface));
+}
+.brand-mark i:nth-child(3) {
+  background: color-mix(in srgb, var(--accent) 50%, var(--surface));
+}
+.home-intro > p,
+.auth-story-content > p,
+.section-heading p,
+.auth-form-wrap > p,
+.page-heading p,
+.possibility p,
+.library-paper > p,
+.paper-authors,
+.paper-meta,
+.abstract-section p,
+.source-card p,
+.source-explainer,
+.shared-note p,
+.chat-welcome > p,
+.index-state > p,
+.composer-caption,
+.sources-empty p,
+.sources-empty h3,
+.settings-section > p,
+.setup-guide p,
+.embedding-setting p,
+.account-settings p,
+.privacy-settings p,
+.import-dialog > p,
+.confirm-dialog p,
+.dialog-foot,
+.auth-story-footer,
+.auth-privacy p,
+.auth-privacy strong,
+.auth-footer,
+.auth-top-link,
+.import-caption,
+.example-line,
+.home-footer,
+.library-paper-bottom,
+.library-tools > span,
+.privacy-label,
+.breadcrumb-paper,
+.user-row small,
+.recent-papers small,
+.sidebar-empty,
+.local-card small,
+.grounded-label,
+.sidebar-section-title,
+.greeting,
+.story-tag,
+.inline-label,
+.import-form > label {
+  color: var(--text-muted);
+}
+.breadcrumb,
+.main-nav button,
+.settings-nav,
+.recent-papers > button > span,
+.user-row strong,
+.local-card strong,
+.settings-connection strong,
+.model-settings label,
+.embedding-setting > span,
+.embedding-setting strong,
+.account-settings strong,
+.private-chip,
+.privacy-settings h3,
+.setup-guide code,
+.settings-section .setting-help {
+  color: var(--text-muted);
+}
+.main-nav button.active,
+.settings-nav.active,
+.recent-papers > button.selected,
+.main-nav button:hover,
+.settings-nav:hover,
+.recent-papers > button:hover {
+  background: var(--soft);
+  color: var(--accent);
+}
+.new-paper-button,
+.secondary,
+.import-input,
+.composer,
+.library-paper,
+.recent-card,
+.source-card,
+.paper-pdf-link,
+.auth-form-wrap input,
+.model-settings input,
+.search-input,
+.import-dialog,
+.confirm-dialog {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+  box-shadow: none;
+}
+.primary,
+.send-button {
+  background: var(--accent);
+  color: #fff;
+}
+.primary:hover:not(:disabled),
+.send-button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 85%, var(--text));
+}
+html[data-theme] .primary,
+html[data-theme] .send-button {
+  color: var(--on-accent, #ffffff);
+}
+.secondary:hover,
+.library-paper:hover,
+.recent-card:hover,
+.paper-pdf-link:hover {
+  background: var(--soft);
+  border-color: var(--accent);
+}
+.import-input:focus-within,
+.composer:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+input,
+textarea,
+select {
+  color: var(--text);
+  background: var(--surface);
+}
+input::placeholder,
+textarea::placeholder,
+.composer textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+.local-card,
+.question-message,
+.chat-suggestions > button,
+.welcome-icon,
+.large-symbol,
+.auth-small-symbol,
+.dialog-symbol,
+.setup-guide,
+.privacy-settings,
+.settings-connection,
+.embedding-setting strong,
+.arxiv-chip,
+.citation-number,
+.paper-type-icon,
+.answer-logo,
+.nav-count,
+.avatar,
+.auth-tabs,
+.thinking,
+.pdf-loading {
+  background: var(--soft);
+  border-color: var(--border);
+  color: var(--accent);
+}
+.auth-tabs button {
+  color: var(--text-muted);
+}
+.auth-tabs button.active {
+  background: var(--surface);
+  color: var(--accent);
+}
+.question-message p,
+.markdown,
+.markdown strong,
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  color: var(--text);
+}
+.markdown pre,
+.markdown td,
+.markdown th,
+.markdown blockquote {
+  background: var(--soft);
+  border-color: var(--border);
+}
+.markdown code,
+.markdown a {
+  color: var(--accent);
+}
+.answer-label,
+.question-message > span,
+.answer-actions button,
+.paper-tabs button,
+.paper-panel-heading,
+.paper-panel-heading > a,
+.source-card-heading button,
+.source-expand,
+.paper-pdf-link,
+.arxiv-chip,
+.abstract-section h3,
+.model-picker select,
+.pdf-panel > a,
+.citation-number,
+.chat-suggestions > button > span,
+.chat-suggestions small,
+.thinking p,
+.text-button,
+.icon-button,
+.example-line button {
+  color: var(--text-muted);
+}
+.paper-tabs button.active,
+.answer-actions button:hover,
+.text-button:hover,
+.icon-button:hover {
+  color: var(--accent);
+}
+.paper-tabs button.active {
+  border-color: var(--accent);
+}
+.paper-tabs button > span {
+  background: var(--soft);
+  color: var(--accent);
+}
+.paper-panel .status-badge {
+  color: var(--text-muted);
+}
+.status-ready {
+  color: #75a78e;
+}
+.status-failed {
+  color: #ce7f87;
+}
+.status-indexing,
+.status-queued {
+  color: var(--accent);
+}
+.error-banner {
+  background: color-mix(in srgb, #e87279 10%, var(--surface));
+  border-color: color-mix(in srgb, #e87279 30%, var(--border));
+  color: #df858c;
+}
+.art-page,
+.art-note,
+.art-citation {
+  background: var(--surface);
+  border-color: var(--border);
+}
+.page-back {
+  background: var(--soft);
+}
+.page-middle {
+  background: var(--panel);
+}
+.art-title {
+  color: var(--text);
+}
+.art-authors,
+.art-page-top,
+.art-note,
+.art-note small,
+.art-citation {
+  color: var(--text-muted);
+}
+.art-columns i {
+  background: var(--border);
+}
+.art-graph span {
+  background: var(--soft);
+}
+.art-divider {
+  background: var(--border);
+}
+.orbit {
+  border-color: var(--border);
+}
+.auth-story:after {
+  background: var(--soft);
+}
+.pdf-reader,
+.pdf-reader-scroll {
+  background: var(--bg);
+}
+.pdf-reader-toolbar,
+.pdf-reader-footer {
+  background: var(--panel);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+.pdf-page-controls input {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+.pdf-reader-footer a {
+  color: var(--accent);
+}
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: 13px;
+  margin-top: 23px;
+}
+.theme-option {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  position: relative;
+}
+.theme-option.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.theme-select {
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+}
+.theme-select > span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text);
+  margin: 12px 2px 2px;
+  padding-right: 40px;
+}
+.theme-select > span > svg {
+  color: var(--accent);
+}
+.theme-thumbnail {
+  height: 85px;
+  border: 1px solid;
+  border-radius: 5px;
+  display: flex;
+  padding: 8px;
+  gap: 6px;
+}
+.theme-thumbnail > span {
+  width: 24%;
+  border-radius: 3px;
+}
+.theme-thumbnail > div {
+  flex: 1;
+  border-radius: 4px;
+  padding: 13px 7px;
+}
+.theme-thumbnail i {
+  display: block;
+  width: 24px;
+  height: 5px;
+  border-radius: 2px;
+  margin-bottom: 9px;
+}
+.theme-thumbnail b {
+  display: block;
+  width: 80%;
+  height: 3px;
+  opacity: 0.65;
+  margin-top: 6px;
+}
+.theme-thumbnail b:last-child {
+  width: 60%;
+}
+.theme-option-actions {
+  position: absolute;
+  bottom: 12px;
+  right: 7px;
+  display: flex;
+  gap: 4px;
+}
+.theme-option-actions button {
+  color: var(--text-muted);
+  padding: 4px;
+  display: flex;
+}
+.theme-option-actions button:hover {
+  color: var(--accent);
+}
+.theme-create {
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 139px;
+  font-size: 11px;
+  background: var(--panel);
+}
+.theme-create:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.theme-editor {
+  padding: 20px;
+  margin-top: 23px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+}
+.theme-editor-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.theme-editor-heading > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  color: var(--text);
+}
+.theme-editor-fields {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 15px;
+  margin-top: 16px;
+}
+.theme-editor label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.theme-editor-fields input,
+.theme-editor-fields select {
+  width: 100%;
+  display: block;
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 12px;
+}
+.color-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 15px;
+  margin: 22px 0;
+}
+.color-fields label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.color-fields input {
+  width: 38px;
+  height: 38px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.color-fields small {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  opacity: 0.7;
+}
+.theme-live-preview {
+  border: 1px solid;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+}
+.theme-live-preview > div {
+  padding: 15px;
+  max-width: 25%;
+  font-size: 10px;
+  border-radius: 5px;
+}
+.theme-live-preview > section {
+  flex: 1;
+  padding: 18px;
+  border-radius: 6px;
+}
+.theme-live-preview h3 {
+  font-size: 16px;
+  font-weight: 550;
+}
+.theme-live-preview p {
+  font-size: 11px;
+  line-height: 1.7;
+  margin-top: 9px;
+}
+.theme-live-preview span {
+  display: inline-block;
+  font-size: 10px;
+  margin-top: 15px;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+.theme-editor-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.theme-contrast-note {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+.save-confirmation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--accent);
+  margin-top: 15px;
+}
+@media (max-width: 540px) {
+  .topbar-actions {
+    gap: 12px;
+  }
+  .theme-editor-fields {
+    grid-template-columns: 1fr;
+  }
+  .theme-editor {
+    padding: 15px;
+  }
+  .theme-live-preview {
+    padding: 8px;
+    gap: 8px;
+  }
+  .theme-live-preview > div {
+    display: none;
+  }
+  .theme-live-preview h3 {
+    font-size: 13px;
+  }
+  .theme-editor-footer {
+    flex-wrap: wrap;
+  }
+}

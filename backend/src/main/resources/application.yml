@@ -1,68 +1,26 @@
-spring:
-  application:
-    name: primer
-  datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/primer}
-    username: ${DATABASE_USERNAME:primer}
-    password: ${DATABASE_PASSWORD:primer}
-  jpa:
-    hibernate:
-      ddl-auto: validate
-  flyway:
-    enabled: true
-  ai:
-    # Embeddings are not used yet, and leaving them enabled would autoconfigure an embedding
-    # model per starter — including one pointed at Groq, which serves no embeddings endpoint.
-    model:
-      embedding: none
-    google:
-      genai:
-        api-key: ${GEMINI_API_KEY:}
-        chat:
-          model: ${GEMINI_MODEL:gemini-flash-latest}
-    # Groq speaks the OpenAI API, so it is configured through the OpenAI starter with the
-    # base-url overridden. Only a vision-capable model accepts image input.
-    openai:
-      api-key: ${GROQ_API_KEY:}
-      base-url: ${GROQ_BASE_URL:https://api.groq.com/openai}
-      chat:
-        options:
-          model: ${GROQ_MODEL:qwen/qwen3.6-27b}
-          # A reasoning model spends output tokens thinking before it answers. Too low a ceiling and
-          # the reply is cut off mid-thought, leaving no JSON at all; too high and a single call can
-          # exceed a per-minute token budget.
-          max-tokens: ${GROQ_MAX_TOKENS:4096}
-          reasoning-effort: ${GROQ_REASONING_EFFORT:none}
-
 server:
-  port: 8080
-
-
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8080}
+  servlet:
+    session:
+      timeout: 12h
+      cookie:
+        http-only: true
+        same-site: lax
+        secure: ${SECURE_COOKIES:false}
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:file:./data/folio;AUTO_SERVER=FALSE}
+    username: ${DATABASE_USER:sa}
+    password: ${DATABASE_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+folio:
+  data-directory: ${DATA_DIRECTORY:./data/papers}
+  ollama-url: ${OLLAMA_URL:http://localhost:11434}
+  chat-model: ${CHAT_MODEL:phi4-mini:latest}
+  embedding-model: ${EMBEDDING_MODEL:nomic-embed-text}
 primer:
-  storage:
-    root: ${PAPER_STORAGE_ROOT:./data/papers}
-  pdf-extraction:
-    max-source-size: 50MB
-    max-pages: 100
-    render-dpi: 150
-    max-rendered-pages: 20
-    max-total-image-size: 50MB
-  questionnaire:
-    min-questions: 5
-    max-questions: 10
-    max-attempts: 3
-    # Both agents are sent this much paper text each, and a rejected questionnaire costs one more
-    # call, so a run can spend three times this within a minute. The default is sized for Groq's
-    # free tier (8000 tokens/minute); on a paid tier or a large-context model, raise it — more of the
-    # paper reaching the agents means better-grounded questions.
-    max-input-characters: ${PRIMER_QUESTIONNAIRE_MAX_INPUT_CHARACTERS:8000}
-  ai:
-    # Bean name of the active dev.primer.ai.AIInterface implementation.
-    # To switch providers, change only this value (e.g. "openai", "anthropic")
-    # once a corresponding @Service("<name>") bean exists.
-    provider: ${PRIMER_AI_PROVIDER:gemini}
-    max-image-size: 15MB
-    allowed-image-types:
-      - image/png
-      - image/jpeg
-      - image/webp
+  search-api-key: ${BRAVE_SEARCH_API_KEY:}
